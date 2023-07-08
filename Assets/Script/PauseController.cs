@@ -15,6 +15,12 @@ public class PauseController : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void NewGame(){
+        Debug.Log("BUTTON -> NewGame");
+        pauseMenu.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
     public void Resume(){
         Debug.Log("BUTTON -> Resume");
         pauseMenu.SetActive(false);
