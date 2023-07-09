@@ -21,6 +21,10 @@ public class PauseController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void ContactUs(string enlace){
+        Application.OpenURL(enlace);
+    }
+
     public void Resume(){
         Debug.Log("BUTTON -> Resume");
         pauseMenu.SetActive(false);
