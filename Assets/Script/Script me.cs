@@ -7,26 +7,20 @@ public class Scriptme : MonoBehaviour
     private int vidas = 3;
     private Rigidbody2D rb;
     private Animator animator;
+    private SpriteRenderer spriteR;
 
     float nivelTecho             = 8.82f;
-    float limiteR                = 10.6604f;
-    float limitel                = -11.44f;
-    float Velocidad              = 4f;
-    float fuerzaSalto            = 30f;
-    float fuerzaDesplazamiento   = 100;
+    //float limiteR                = 10.6604f;
+    //float limitel                = -11.44f;
+    //float Velocidad              = 4f;
+    float fuerzaSalto            = 110f;
+    float fuerzaDesplazamiento   = 80;
 
     bool enElPiso = false;
+    bool hasjump = false;
 
     [SerializeField] private AudioSource salto_SFX;
 
-
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -35,49 +29,63 @@ public class Scriptme : MonoBehaviour
        gameObject.transform.position = new Vector3(-10.44f,nivelTecho,0);
        Debug.Log("INIT");
        Debug.Log("VIDAS: " + vidas);
+       rb = GetComponent<Rigidbody2D>();
+       animator = gameObject.GetComponent<Animator>();
+       spriteR = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float movimientoH = Input.GetAxis("Horizontal");
+        //float movimientoH = Input.GetAxis("Horizontal");
+        //rb.velocity = new Vector2(movimientoH * Velocidad, rb.velocity.y);
+        //animator.SetFloat("Horizontal", Mathf.Abs(movimientoH));
 
-        rb.velocity = new Vector2(movimientoH * Velocidad, rb.velocity.y);
-
-        animator.SetFloat("Horizontal", Mathf.Abs(movimientoH));
-
-        if (Input.GetKeyDown(KeyCode.Space) && enElPiso)
-        {
-            rb.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
-            enElPiso = false;
-            animator.SetBool("Suelo", false);
+        //if (Input.GetKeyDown(KeyCode.Space) && enElPiso)
+        //{rb.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
+        //enElPiso = false;
+        //animator.SetBool("Suelo", false);}
+        //if (Input.GetKeyDown(KeyCode.RightArrow)){
+        //    gameObject.GetComponent<SpriteRenderer>().flipX = false;}
+        //else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        //{
+        //    gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        //}
+            if(Input.GetKey("right") && enElPiso){
+               Debug.Log("RIGHT");
+               rb.AddForce(new Vector2(fuerzaDesplazamiento, 0));
+               animator.SetBool("running", true);
+               spriteR.flipX=false;
         }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        }
-
-        if(gameObject.transform.rotation.z > 0.3 || gameObject.transform.rotation.z < -0.3){
-            Debug.Log("ROTATION: " + gameObject.transform.rotation.z);
-            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        if(Input.GetKey("right") && enElPiso){
-            Debug.Log("RIGHT");
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(fuerzaDesplazamiento, 0));
-        }
-        else if(Input.GetKey("left") && gameObject.transform.position.x > limitel){
+        else if(Input.GetKey("left") && enElPiso){
                 Debug.Log("LEFT");
-                gameObject.transform.Translate(-Velocidad*Time.deltaTime, 0, 0);
+                rb.AddForce(new Vector2(-fuerzaDesplazamiento, 0));
+                animator.SetBool("running", true);
+                spriteR.flipX=true;
         }
+        if( !(Input.GetKey("right") || Input.GetKey("left")) ){
+            animator.SetBool("running", false);
+            }
 
-        if(Input.GetKeyDown("space") && enElPiso){
+        if (rb.velocity.y < -0.1){
+            animator.SetBool("Falling", true);
+        }    
+
+        if((Input.GetKeyDown("space") && enElPiso)||(Input.GetKeyDown("space") && hasjump)){
                 Debug.Log("UP - enElPiso: " + enElPiso);
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -fuerzaSalto*Physics2D.gravity[1]*gameObject.GetComponent<Rigidbody2D>().mass));
+                if(hasjump){
+                    //Esto se ejecuta cyabdi ta ha saldo por primera vez
+                    animator.SetBool("doblejump", true);
+                }
+                    else{
+                        //Esto se ejecuta cuando es el primer salto
+                        salto_SFX.Play();
+                        hasjump = true;
+                        animator.SetBool("jump", true);
+                        animator.SetBool("doblejump", false);
+                    }
+                
+                rb.AddForce(new Vector2(0, -fuerzaSalto*Physics2D.gravity[1]*rb.mass));
                 salto_SFX.Play();
                 enElPiso = false;
                 }
@@ -86,8 +94,11 @@ public class Scriptme : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.transform.tag == "Ground"){
             enElPiso = true;
+            animator.SetBool("doblejump", false);
+            animator.SetBool("jump", false);
+            animator.SetBool("Falling", false);
             Debug.Log("GROUND COLLISION");
-            animator.SetBool("Suelo", false);
+            
         }
         else if(collision.transform.tag == "obstacle"){
             enElPiso = true;
@@ -102,6 +113,7 @@ public class Scriptme : MonoBehaviour
         Debug.Log("VIDAS: " + vidas);
         if(vidas <= 0){
             Debug.Log("GAME OVER");
+            vidas = 3;
         }
         gameObject.transform.position = new Vector3(-10.44f,nivelTecho,0);
     }
