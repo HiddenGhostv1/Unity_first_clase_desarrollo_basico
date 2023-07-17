@@ -9,15 +9,13 @@ public class Scriptme : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteR;
 
-    float nivelTecho             = 8.82f;
-    //float limiteR                = 10.6604f;
-    //float limitel                = -11.44f;
-    //float Velocidad              = 4f;
-    float fuerzaSalto            = 110f;
-    float fuerzaDesplazamiento   = 80;
+    float nivelTecho           = 8.82f;
+    float fuerzaSalto          = 80;     // x veces la masa del personaje
+    float fuerzaImpulso        = 2000;  // Fuerza en Newtons
+    float fuerzaDesplazamiento = 100;   // Fuerza en Newtons
 
     bool enElPiso = false;
-    bool hasjump = false;
+    bool hasJump = false;
 
     [SerializeField] private AudioSource salto_SFX;
 
@@ -37,20 +35,6 @@ public class Scriptme : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //float movimientoH = Input.GetAxis("Horizontal");
-        //rb.velocity = new Vector2(movimientoH * Velocidad, rb.velocity.y);
-        //animator.SetFloat("Horizontal", Mathf.Abs(movimientoH));
-
-        //if (Input.GetKeyDown(KeyCode.Space) && enElPiso)
-        //{rb.AddForce(new Vector2(0f, fuerzaSalto), ForceMode2D.Impulse);
-        //enElPiso = false;
-        //animator.SetBool("Suelo", false);}
-        //if (Input.GetKeyDown(KeyCode.RightArrow)){
-        //    gameObject.GetComponent<SpriteRenderer>().flipX = false;}
-        //else if(Input.GetKeyDown(KeyCode.LeftArrow))
-        //{
-        //    gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        //}
             if(Input.GetKey("right") && enElPiso){
                Debug.Log("RIGHT");
                rb.AddForce(new Vector2(fuerzaDesplazamiento, 0));
@@ -67,34 +51,42 @@ public class Scriptme : MonoBehaviour
             animator.SetBool("running", false);
             }
 
-        if (rb.velocity.y < -0.1){
+        if(rb.velocity.y < -0.1){
+            hasJump = false;
             animator.SetBool("Falling", true);
-        }    
+            animator.SetBool("jump", false);
+            animator.SetBool("doubleJump", false);
+        }
 
-        if((Input.GetKeyDown("space") && enElPiso)||(Input.GetKeyDown("space") && hasjump)){
+        if((Input.GetKeyDown("space") && enElPiso)||(Input.GetKeyDown("space") && hasJump)){
                 Debug.Log("UP - enElPiso: " + enElPiso);
-                if(hasjump){
-                    //Esto se ejecuta cyabdi ta ha saldo por primera vez
-                    animator.SetBool("doblejump", true);
+               if(hasJump){
+                // Esto se ejecuta cuando YA HA SALTADO por primera vez
+                animator.SetBool("doubleJump", true);
+                hasJump  = false;
+                float d_i = 1;
+                if(rb.velocity.x < 0) d_i = -1; // ¿El personaje va para la derecha o la izquierda?
+                //fuerza vertical y horizontal - como el personaje está en el aire es necesario imprimirle también fuerza horizontal
+                rb.AddForce(new Vector2(d_i*fuerzaImpulso, -fuerzaSalto*Physics2D.gravity[1]*rb.mass));
                 }
-                    else{
-                        //Esto se ejecuta cuando es el primer salto
-                        salto_SFX.Play();
-                        hasjump = true;
-                        animator.SetBool("jump", true);
-                        animator.SetBool("doblejump", false);
-                    }
-                
-                rb.AddForce(new Vector2(0, -fuerzaSalto*Physics2D.gravity[1]*rb.mass));
+
+            else{
+                // Esto se ejecuta cuando es el PRIMER SALTO
                 salto_SFX.Play();
-                enElPiso = false;
-                }
-            }        
+                hasJump  = true;
+                animator.SetBool("jump", true);
+                animator.SetBool("doubleJump", false);
+                //fuerza vertical - el desplazamiento horizontal lo da la inercia que lleve el personaje
+                rb.AddForce(new Vector2(0, -fuerzaSalto*Physics2D.gravity[1]*rb.mass));
+            }
+            enElPiso = false;
+        }
+    }        
                 
     private void OnCollisionEnter2D(Collision2D collision){
         if(collision.transform.tag == "Ground"){
             enElPiso = true;
-            animator.SetBool("doblejump", false);
+            animator.SetBool("doubleJump", false);
             animator.SetBool("jump", false);
             animator.SetBool("Falling", false);
             Debug.Log("GROUND COLLISION");

@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 6961467196008883028}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &7497575877187768605
 Grid:
@@ -2201,7 +2201,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &1811484715362968627
+--- !u!114 &8029551190821636562
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
