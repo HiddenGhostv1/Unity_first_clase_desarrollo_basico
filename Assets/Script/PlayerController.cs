@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //gameObject.transform.position = puntoAparicion;
+        gameObject.transform.position = puntoAparicion;
         Debug.Log("INIT");
         Debug.Log("GRAVITY: " + Physics2D.gravity[1] + " [m/s²]");
         Debug.Log("DELTA TIME: " + Time.deltaTime + " [s]");

@@ -9,7 +9,7 @@ public class Scriptme : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteR;
 
-    float nivelTecho           = 8.82f;
+    float nivelTecho           = 9f;
     float fuerzaSalto          = 80;     // x veces la masa del personaje
     float fuerzaImpulso        = 2000;  // Fuerza en Newtons
     float fuerzaDesplazamiento = 100;   // Fuerza en Newtons
@@ -24,7 +24,7 @@ public class Scriptme : MonoBehaviour
     void Start()
     {
        // Punto de inicio personaje (-10.44,-2.28)
-       gameObject.transform.position = new Vector3(-10.44f,nivelTecho,0);
+       //gameObject.transform.position = new Vector3(-5.04f,nivelTecho,0);
        Debug.Log("INIT");
        Debug.Log("VIDAS: " + vidas);
        rb = GetComponent<Rigidbody2D>();
