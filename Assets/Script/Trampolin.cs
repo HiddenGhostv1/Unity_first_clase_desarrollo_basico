@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trampolin : MonoBehaviour
+public class TrampolinController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private float jumpForce = 17f;
+
+    private Animator animator;
+
+    private void Start() {
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnTriggerEnter2D(Collider2D collider) {
+        if(collider.CompareTag("Player")){
+            Rigidbody2D rb = collider.GetComponent<Rigidbody2D>();
+            Animator animatorPlayer = collider.GetComponent<Animator>();
+            rb.velocity = (Vector2.up * jumpForce); // Se imprime la velocidad al personaje hacia arriba
+            animatorPlayer.SetBool("jump", true);   // Animación para el personaje (salto)
+            animator.SetTrigger("release");         // Animación para el trampolin
+        }
     }
 }

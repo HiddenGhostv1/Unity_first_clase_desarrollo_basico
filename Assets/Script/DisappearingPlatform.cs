@@ -1,13 +1,13 @@
 using UnityEngine;
 
 public class DisappearingPlatform : MonoBehaviour
-{
+{                           
     public float delayTime = 2f; // Tiempo de demora en segundos antes de desaparecer.
     private bool isDisappearing = false;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Untagged") && !isDisappearing)
+        if (collision.gameObject.CompareTag("Player") && !isDisappearing)
         {
             isDisappearing = true;
             Invoke("DisappearPlatform", delayTime);

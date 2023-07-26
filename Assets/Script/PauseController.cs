@@ -8,6 +8,8 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject pauseMenu;  // Asignar el panel PauseMenu a este objeto desde 
                                             // el elemento 'script' en el inspector, una vez
                                             // este script se haya asociado a los botones.
+    private static bool paused = false;
+
     
     public void Pause(){
         Debug.Log("BUTTON -> Pause");
@@ -39,5 +41,9 @@ public class PauseController : MonoBehaviour
 
     public void Audio(){
         Debug.Log("BUTTON -> Audio");
+    }
+
+    public static bool isPaused(){
+        return PauseController.paused;
     }
 }

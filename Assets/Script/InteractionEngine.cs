@@ -1,75 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionEngine : MonoBehaviour
 {
-    [SerializeField] private GameObject statsRenderer;
-    private StatsController statsRendererController;
 
-    [SerializeField] private GameObject gameOverRenderer;
-    private GameOverController gameoverRendererController;
-
-    private Animator animator;
-    private CharacterStatsManager manager;
-
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        manager = GetComponent<CharacterStatsManager>();
-        statsRendererController = statsRenderer.transform.GetComponent<StatsController>();
-        gameoverRendererController = gameOverRenderer.transform.GetComponent<GameOverController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void manageDeath(){
-        animator.SetTrigger("death");
-        manager.decreseLives();
-        Debug.Log("Vidas: " + manager.getLives());
-        if(manager.getLives() <= 0){
-            Debug.Log("GAME OVER");
-            gameoverRendererController.setActive(true);
-        }
-        else{
-            renderLives();
-            StartCoroutine(respawnCharacter());
-        }
-    }
-
-    private IEnumerator respawnCharacter(){
-        Debug.Log("Respawn Character at " + manager.getRespawnPoint());
-        yield return new WaitForSeconds(1);
-        animator.SetTrigger("iddle");
-        transform.position = manager.getRespawnPoint();
-    }
+    //////////////////////////////////////////////
+    /*         OBSERVER PATTERN (as Publisher)  */
+    public event Action<(int,int,int)> CharacterItemsChanged;
+    public event Action<(int,int,int)> CharacterPowersChanged;
+    public event Action<int> CharacterLivesChanged;
+    //////////////////////////////////////////////
 
     private void OnTriggerEnter2D(Collider2D collider){
-        if(collider.transform.tag == "Trampa"){
-            Debug.Log("TRAMPA");
-            manageDeath();
+        switch(collider.tag){
+            case "Trampa":
+                Debug.Log("[InteractionEngine]TRAMPA");
+                CharacterLivesChanged?.Invoke(-1);
+                break;
+            case "FallDetector":
+                Debug.Log("Caída");
+                CharacterLivesChanged?.Invoke(-1);
+                break;
+            case "Collectable1":
+                Debug.Log("[InteractionEngine]Collectable1");
+                CharacterItemsChanged?.Invoke((1,0,0));
+                break;
+            case "Collectable2":
+                Debug.Log("[InteractionEngine]Collectable2");
+                CharacterItemsChanged?.Invoke((0,1,0));
+                break;
+            case "Collectable3":
+                Debug.Log("[InteractionEngine]Collectable3");
+                CharacterItemsChanged?.Invoke((0,0,1));
+                break;
+            case "Power1":
+                Debug.Log("[InteractionEngine]Power1");
+                CharacterPowersChanged?.Invoke((1,0,0));
+                break;
+            case "Power2":
+                Debug.Log("[InteractionEngine]Power2");
+                CharacterPowersChanged?.Invoke((0,1,0));
+                break;
+            case "Power3":
+                Debug.Log("[InteractionEngine]Power3");
+                CharacterPowersChanged?.Invoke((0,0,1));
+                break;
         }
-        else if(collider.tag == "FallDetector"){
-            Debug.Log("Caída");
-            manageDeath();
-        }
-    }
-
-    private void renderScore(){
-        statsRendererController.updateScore(manager.getScore());
-    }
-    private void renderLives(){
-        int lives = manager.getLives();
-        statsRendererController.updateLives((lives>=1?true:false,lives>=2?true:false,lives>=3?true:false));
-    }
-    private void renderItems(){
-        statsRendererController.updateItems(manager.getItems());
-    }
-    private void renderPowers(){
-        statsRendererController.updatePowers(manager.getPowers());
     }
 }
