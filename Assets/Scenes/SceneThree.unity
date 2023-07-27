@@ -687,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &45459097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a367f1d9dee024c468c5916346868e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCharacter: {fileID: 711311638}
+  defaultCharacter: {fileID: 0}
 --- !u!4 &101230290
 Transform:
   m_ObjectHideFlags: 0
@@ -1818,6 +1818,7 @@ GameObject:
   - component: {fileID: 201492520}
   - component: {fileID: 201492522}
   - component: {fileID: 201492524}
+  - component: {fileID: 201492525}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Trampa
@@ -1958,6 +1959,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &201492525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201492519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9db69b6a8207c243989d106919cbf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 1161723388}
+  - {fileID: 1756212061}
+  speed: 5
 --- !u!1 &211534947
 GameObject:
   m_ObjectHideFlags: 0
@@ -40065,7 +40082,7 @@ GameObject:
   - component: {fileID: 640154646}
   m_Layer: 0
   m_Name: Dead (1)
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40152,7 +40169,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -40262,7 +40279,7 @@ GameObject:
   - component: {fileID: 698426864}
   m_Layer: 0
   m_Name: Dead (2)
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40364,7 +40381,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -40760,7 +40777,7 @@ GameObject:
   - component: {fileID: 796653818}
   m_Layer: 0
   m_Name: Dead (4)
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40864,7 +40881,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -41101,7 +41118,7 @@ Animator:
   m_GameObject: {fileID: 798555162}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aea2e123f44bcbb4faae5130e480813f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6fc5d319e9a83b04abfc439b54df3035, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -41884,7 +41901,7 @@ GameObject:
   - component: {fileID: 947402725}
   m_Layer: 0
   m_Name: Dead
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41986,7 +42003,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -44382,7 +44399,7 @@ GameObject:
   - component: {fileID: 1245484950}
   m_Layer: 0
   m_Name: Dead (3)
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44484,7 +44501,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -45642,7 +45659,7 @@ GameObject:
   - component: {fileID: 1375812220}
   m_Layer: 0
   m_Name: Dead (5)
-  m_TagString: Untagged
+  m_TagString: Trampa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45746,7 +45763,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
@@ -52703,6 +52720,7 @@ GameObject:
   - component: {fileID: 1546742576}
   - component: {fileID: 1546742575}
   - component: {fileID: 1546742578}
+  - component: {fileID: 1546742579}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Trampa
@@ -52838,6 +52856,27 @@ MonoBehaviour:
   - {fileID: 211534947}
   - {fileID: 342732303}
   speed: 2
+--- !u!95 &1546742579
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546742574}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32a65997553eb9e44b3b65e7cad1350f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1562797261
 GameObject:
   m_ObjectHideFlags: 0
@@ -55577,11 +55616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7752960089014528902, guid: 838beaa96bfb7184fb69dd73a5fe66bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 47.6
       objectReference: {fileID: 0}
     - target: {fileID: 7752960089014528902, guid: 838beaa96bfb7184fb69dd73a5fe66bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.5
+      value: 16.2
       objectReference: {fileID: 0}
     - target: {fileID: 7752960089014528902, guid: 838beaa96bfb7184fb69dd73a5fe66bc, type: 3}
       propertyPath: m_LocalPosition.z
