@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
     private CharacterStatsManager manager;
     private InteractionEngine characterInteractionPublisher;    
 
-    float fuerzaSalto          = 80;     // x veces la masa del personaje
+    float fuerzaSalto          = 100;     // x veces la masa del personaje
     float fuerzaImpulso        = 2000;  // Fuerza en Newtons
     float fuerzaDesplazamiento = 100;   // Fuerza en Newtons
 
