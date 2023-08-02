@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject defaultCharacter;
+    [SerializeField] public GameObject defaultCharacter;
     private GameObject actualCharacter; // Mantiene el Prefab del personaje con el que se desea jugar
 
     //////////////////////////////////////////////
@@ -16,9 +16,11 @@ public class GameManager : MonoBehaviour
             GameManager.Instance = this;
             actualCharacter = defaultCharacter;
             DontDestroyOnLoad(this);
+            Debug.Log("Owwo");
         }
         else{
             Destroy(this);
+            Debug.Log("Twwo");
         }
     }
     public static GameManager getInstance(){

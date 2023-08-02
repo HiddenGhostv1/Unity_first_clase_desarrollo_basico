@@ -6,25 +6,33 @@ using UnityEngine.SceneManagement;
 public class TeleporterController : MonoBehaviour
 {
     [SerializeField] private AudioSource teleporter_SFX;
-    [SerializeField] private int destinationEscene;
+    [SerializeField] private Transform destinationPoint;
 
-    private SceneController sceneController;
     private Animator animator;
 
-    private void Start() {
-        sceneController = GetComponent<SceneController>();
+    private void Start()
+    {
         animator = GetComponent<Animator>();
     }
-    
-    private void OnTriggerEnter2D(Collider2D collider){
-        if(collider.tag == "Player"){
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
             Debug.Log("Teleporter");
             teleporter_SFX.Play();
             animator.SetTrigger("collected");
 
-            // ESPERAR A QUE TERMINE LA REPRODUCCIÓN DEL SONIDO
-            sceneController.changeScene(destinationEscene);
-            Destroy(this);
+            // ESPERAR A QUE TERMINE LA REPRODUCCIÓN DEL SONIDO Y LUEGO TELETRANSPORTAR
+            StartCoroutine(TeleportToDestination(collider.transform));
         }
+    }
+
+    private IEnumerator TeleportToDestination(Transform playerTransform)
+    {
+        yield return new WaitForSeconds(teleporter_SFX.clip.length); // Esperar a que termine la reproducción del sonido
+
+        // Teletransportar al jugador al punto de destino
+        playerTransform.position = destinationPoint.position;
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class CamaraController : MonoBehaviour
 {
     public GameObject character;
         
@@ -11,5 +11,8 @@ public class NewBehaviourScript : MonoBehaviour
       transform.position = new Vector3 (character.transform.position.x, character.transform.position.y, transform.position.z);  
     }
 
-    
+    void Start()
+    {
+      character = GameObject.FindWithTag("Player");
+    }   
 }
