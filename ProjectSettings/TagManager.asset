@@ -8,6 +8,12 @@ TagManager:
   - Fondo
   - Trampa
   - ' Obstaculo'
+  - Collectable1
+  - Collectable2
+  - Collectable3
+  - Power1
+  - Power2
+  - Power3
   layers:
   - Default
   - TransparentFX
@@ -50,4 +56,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2034378631
     locked: 0

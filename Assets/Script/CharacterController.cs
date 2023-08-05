@@ -3,42 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
-{
-    private Rigidbody2D rb2d;
-    private Animator animator;
-    private SpriteRenderer spriteR;
-    private CharacterStatsManager manager;
-    private InteractionEngine characterInteractionPublisher;    
-
-    float fuerzaSalto          = 100;     // x veces la masa del personaje
-    float fuerzaImpulso        = 2000;  // Fuerza en Newtons
-    float fuerzaDesplazamiento = 100;   // Fuerza en Newtons
+{   
+    private float fuerzaSalto          = 50;     // x veces la masa del personaje
+    private float fuerzaImpulso        = 25000;  // Fuerza en Newtons
+    private float fuerzaDesplazamiento = 1000;   // Fuerza en Newtons
 
     private float sensibilidadCaida    = 0.5f;   // Alcanzada esta velocidad descendente se considera que el personaje está cayendo
     private float sensibilidadRotacion = 0.3f;   // Alcanzada esta velocidad circular se considera que el personaje está rotando
 
     private float longitudRaycast      = 0.6f;   // Longitud de los rayos laterales para detectar muros
 
+    private Rigidbody2D rb2d;       // Variable para mantener la referencia al componente Rigidbody2D
+    private Animator animator;      // Variable para mantener la referencia al componente Animator
+    private SpriteRenderer spriteR; // Variable para mantener la referencia al componente SpriteRenderer
+    private CharacterStatsManager manager;
+    private InteractionEngine characterInteractionPublisher;
+
     private RaycastHit2D HitL, HitR;
 
     bool enElPiso  = false; // Bandera que verifica que el personaje ha tocado el piso
     bool enElMuroL = false; // Bandera que verifica que el personaje ha tocado el muro izquierdo
     bool enElMuroR = false; // Bandera que verifica que el personaje ha tocado el muro derecho
-    bool hasJumped   = false; // Bandera que indica que el personaje ha realizado el primer salto    
+    bool hasJumped = false; // Bandera que indica que el personaje ha realizado el primer salto
 
     [SerializeField] private AudioSource salto_SFX;
     [SerializeField] private LayerMask rayMask;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        manager = CharacterStatsManager.getInstance();
         Debug.Log("[CharacterController] - Start");
+        manager = CharacterStatsManager.GetInstance();
+        manager.InitializeCharacterStats(gameObject); // Se asocia la instancia del jugador con las estadísticas que se han acumulado
         rb2d = GetComponent<Rigidbody2D>();       // Se obtiene la referencia al componente Rigidbody2D del personaje
         animator = GetComponent<Animator>();      // Se obtiene la referencia al componente Animator del personaje
         spriteR = GetComponent<SpriteRenderer>(); // Se obtiene la referencia al componente SpriteRenderer del personaje
-        characterInteractionPublisher = GetComponent<InteractionEngine>();
-        if (characterInteractionPublisher != null) // Se suscribe a los respectivos eventos
+        
+        // Se suscribe a los eventos en los cuales está interesado
+        if (TryGetComponent<InteractionEngine>(out characterInteractionPublisher))
         {
             characterInteractionPublisher.CharacterLivesChanged += OnCharacterLivesChanged;
         }
@@ -55,16 +56,16 @@ public class CharacterController : MonoBehaviour
         Debug.Log("[CharacterController]Lives Changed: " + deltaLives);
         if(deltaLives < 0){
             animator.SetTrigger("desappear");
-            if(manager.getLives()>0){
-                StartCoroutine(respawnCharacter());
+            if(manager.GetLives()>0){
+                StartCoroutine(RespawnCharacter());
             }
         }        
     }
 
-    private IEnumerator respawnCharacter(){
+    private IEnumerator RespawnCharacter(){
         yield return new WaitForSeconds(1);
         animator.SetTrigger("respawn");
-        transform.position = manager.getRespawnPoint();
+        transform.position = manager.GetRespawnPoint();
     }
 
     void Update()
@@ -86,13 +87,13 @@ public class CharacterController : MonoBehaviour
         }
         
         // Se verifica que el personaje se deba mover a la izquierda o a la derecha
-        if(Input.GetKey("right") && enElPiso){
+        if(Input.GetKey(KeyCode.RightArrow) && enElPiso){
             //Debug.Log("RIGHT");
             rb2d.AddForce(new Vector2(fuerzaDesplazamiento, 0));
             animator.SetBool("running", true);
             spriteR.flipX=false;
         }
-        else if(Input.GetKey("left") && enElPiso){
+        else if(Input.GetKey(KeyCode.LeftArrow) && enElPiso){
             //Debug.Log("LEFT");
             rb2d.AddForce(new Vector2(-fuerzaDesplazamiento, 0));
             animator.SetBool("running", true);
@@ -102,7 +103,7 @@ public class CharacterController : MonoBehaviour
         // Si NO se está moviendo a la derecha NI a la izquierda
         // se pone en falso la bandera que cambia la animación de "running"
         // Nota: El símbolo exclamación (!) es una negación lógica
-        if( !(Input.GetKey("right") || Input.GetKey("left")) ){
+        if( !(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)) ){
             animator.SetBool("running", false);
         }
 
@@ -117,7 +118,7 @@ public class CharacterController : MonoBehaviour
         }
 
         // Implementación del salto
-        if((Input.GetKeyDown("space") && enElPiso)||(Input.GetKeyDown("space") && hasJumped)){
+        if((Input.GetKeyDown(KeyCode.Space) && enElPiso)||(Input.GetKeyDown(KeyCode.Space) && hasJumped)){
             //Debug.Log("FLOOR JUMP");
             if(hasJumped){
                 // Esto se ejecuta cuando YA HA SALTADO por primera vez
@@ -141,7 +142,7 @@ public class CharacterController : MonoBehaviour
         }
 
         // Implementación del salto del muro
-        if(Input.GetKeyDown("space") && (enElMuroL || enElMuroR)){
+        if(Input.GetKeyDown(KeyCode.Space) && (enElMuroL || enElMuroR)){
             //Debug.Log("WALL JUMP");
             animator.SetBool("jump", true);
             if(enElMuroL){
@@ -187,10 +188,14 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("Falling", false);
             //Debug.Log("GROUND COLLISION");
         }
-
+        else if(collision.collider.CompareTag("Obstaculo")){
+            enElPiso = true;
+            Debug.Log("OBSTACLE COLLISION");
+        }
     }
 
-    public void setMask(LayerMask mask){
+    public void SetMask(LayerMask mask){
         rayMask = mask;
     }
 }
+

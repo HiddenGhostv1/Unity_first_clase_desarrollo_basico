@@ -5,33 +5,45 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] public GameObject defaultCharacter;
-    private GameObject actualCharacter; // Mantiene el Prefab del personaje con el que se desea jugar
+    private GameObject actualCharacter;
 
-    //////////////////////////////////////////////
-    /*          SINGLETON PATTERN               */
+    private bool lockCharacterStats; // Agregado: propiedad para bloquear estadísticas de personaje
+
     private static GameManager Instance;
+
     private void Awake()
     {
-        if(GameManager.Instance == null){
+        if (GameManager.Instance == null)
+        {
             GameManager.Instance = this;
             actualCharacter = defaultCharacter;
+            lockCharacterStats = false; // Inicializa la propiedad
             DontDestroyOnLoad(this);
-            Debug.Log("Owwo");
         }
-        else{
-            Destroy(this);
-            Debug.Log("Twwo");
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
-    public static GameManager getInstance(){
+
+    public static GameManager GetInstance()
+    {
         return GameManager.Instance;
     }
-    ///////////////////////////////////////////////
 
-    public void setCharacter(GameObject character){
+    public void SetCharacter(GameObject character)
+    {
         actualCharacter = character;
     }
-    public GameObject getCharacter(){
+
+    public GameObject GetCharacter()
+    {
         return actualCharacter;
+    }
+
+    public bool LockCharacterStats // Agregado: propiedad para acceder a lockCharacterStats
+    {
+        get { return lockCharacterStats; }
+        set { lockCharacterStats = value; }
     }
 }

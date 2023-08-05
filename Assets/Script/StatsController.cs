@@ -18,7 +18,7 @@ public class StatsController : MonoBehaviour
     /*          OBSERVER PATTERN (as Observer)  */
     private void Start()
     {
-        manager = CharacterStatsManager.getInstance();
+        manager = CharacterStatsManager.GetInstance();
         if (manager != null) // Se suscribe a los respectivos eventos
         {
             manager.CharacterStatsChanged += OnCharacterStatsChanged;
@@ -34,10 +34,10 @@ public class StatsController : MonoBehaviour
     }
     private void OnCharacterStatsChanged()
     {
-        updateLives(manager.getLives());
-        updatePowers(manager.getPowers());
-        updateItems(manager.getItems());
-        updateScore(manager.getScore());
+        updateLives(manager.GetLives());
+        //updatePowers(manager.GetPowers());
+        updateItems(manager.GetItems());
+        updateScore(manager.GetScore());
     }
     //////////////////////////////////////////////
 
@@ -58,14 +58,14 @@ public class StatsController : MonoBehaviour
         _items[0]     = transform.GetChild(2).GetChild(0).GetChild(0).gameObject.GetComponent<TMP_Text>();
         _items[1]     = transform.GetChild(2).GetChild(1).GetChild(0).gameObject.GetComponent<TMP_Text>();
         _items[2]     = transform.GetChild(2).GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>();
-        _powers[0]    = transform.GetChild(3).GetChild(0).gameObject.GetComponent<Image>();
-        _powers[1]    = transform.GetChild(3).GetChild(1).gameObject.GetComponent<Image>();
-        _powers[2]    = transform.GetChild(3).GetChild(2).gameObject.GetComponent<Image>();
+        //_powers[0]    = transform.GetChild(3).GetChild(0).gameObject.GetComponent<Image>();
+        //_powers[1]    = transform.GetChild(3).GetChild(1).gameObject.GetComponent<Image>();
+        //_powers[2]    = transform.GetChild(3).GetChild(2).gameObject.GetComponent<Image>();
 
-        updateLives(manager.getLives());
-        updatePowers(manager.getPowers());
-        updateItems(manager.getItems());
-        updateScore(manager.getScore());
+        updateLives(manager.GetLives());
+        //updatePowers(manager.GetPowers());
+ //       updateItems(manager.GetItems());
+        updateScore(manager.GetScore());
     }
 
     private void updateLives(int lives){
@@ -129,28 +129,28 @@ public class StatsController : MonoBehaviour
         }
     }
 
-    private void updatePowers((bool item1, bool item2, bool item3)powers){
-        Color tempColor;
+   // private void updatePowers((bool item1, bool item2, bool item3)powers){
+    //    Color tempColor;
+//
+ //       tempColor = _powers[0].color;
+//        tempColor.r = powers.item1?1f:0f;
+//        tempColor.g = powers.item1?1f:0f;
+//        tempColor.b = powers.item1?1f:0f;
+//        tempColor.a = powers.item1?1f:0.2392f;
+  //      _powers[0].color = tempColor;
 
-        tempColor = _powers[0].color;
-        tempColor.r = powers.item1?1f:0f;
-        tempColor.g = powers.item1?1f:0f;
-        tempColor.b = powers.item1?1f:0f;
-        tempColor.a = powers.item1?1f:0.2392f;
-        _powers[0].color = tempColor;
+//        tempColor = _powers[1].color;
+//        tempColor.r = powers.item2?1f:0f;
+//        tempColor.g = powers.item2?1f:0f;
+//        tempColor.b = powers.item2?1f:0f;
+//        tempColor.a = powers.item2?1f:0.2392f;
+ //       _powers[1].color = tempColor;
 
-        tempColor = _powers[1].color;
-        tempColor.r = powers.item2?1f:0f;
-        tempColor.g = powers.item2?1f:0f;
-        tempColor.b = powers.item2?1f:0f;
-        tempColor.a = powers.item2?1f:0.2392f;
-        _powers[1].color = tempColor;
-
-        tempColor = _powers[2].color;
-        tempColor.r = powers.item3?1f:0f;
-        tempColor.g = powers.item3?1f:0f;
-        tempColor.b = powers.item3?1f:0f;
-        tempColor.a = powers.item3?1f:0.2392f;
-        _powers[2].color = tempColor;
-    }
+//        tempColor = _powers[2].color;
+//        tempColor.r = powers.item3?1f:0f;
+ //       tempColor.g = powers.item3?1f:0f;
+  //      tempColor.b = powers.item3?1f:0f;
+   //     tempColor.a = powers.item3?1f:0.2392f;
+  //      _powers[2].color = tempColor;
+  //  }
 }
