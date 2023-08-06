@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4629573375478314922}
   - component: {fileID: 15115815384006244}
-  - component: {fileID: 5766801776856146425}
+  - component: {fileID: 199014663652738389}
+  - component: {fileID: 4199169542797637082}
   - component: {fileID: 9206844831301846022}
   - component: {fileID: 2586966725337119815}
   - component: {fileID: 8746913462196302452}
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5766801776856146425
+--- !u!114 &199014663652738389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,10 +98,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5937571356710581382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d7b762300851d048a48d9fa23dfd48c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eceb46d228a5b54da4ddfeb510c88a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getCoin_SFX: {fileID: 2586966725337119815}
+  teleporter_SFX: {fileID: 2586966725337119815}
+  destinationEscene: 0
+--- !u!114 &4199169542797637082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937571356710581382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3168356df0ebabe4ca60a9883c794122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &9206844831301846022
 CircleCollider2D:
   m_ObjectHideFlags: 0

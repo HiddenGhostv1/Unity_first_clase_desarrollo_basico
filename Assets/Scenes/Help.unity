@@ -296,7 +296,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -557, y: 390.6798}
+  m_AnchoredPosition: {x: -467, y: 474}
   m_SizeDelta: {x: 612.2853, y: 682.7722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &370668531
@@ -362,14 +362,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390186527}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.9999864, z: -0, w: -0.0052120797}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 573047579}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.597, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 3, y: -134}
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1846922252, guid: 53d8c47539b74bb4bb3f5bee58379697, type: 3}
+  m_Sprite: {fileID: -4540918584354326388, guid: 552146dbb8bac6f449493bca4b69540f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1669165888, guid: 53d8c47539b74bb4bb3f5bee58379697, type: 3}
+  m_Sprite: {fileID: -4540918584354326388, guid: 552146dbb8bac6f449493bca4b69540f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -968,7 +968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0.16, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -876.14, y: 442.4}
+  m_AnchoredPosition: {x: 670, y: 0}
   m_SizeDelta: {x: 167.7229, y: 150.9916}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738409448
@@ -1017,7 +1017,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 738409451}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: changeScene
+        m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1246623442, guid: 53d8c47539b74bb4bb3f5bee58379697, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 320f4eb52e227b446830a1f6fd691fca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

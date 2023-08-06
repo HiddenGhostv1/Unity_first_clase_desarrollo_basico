@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if(character == null){return;}
-        transform.position = new Vector3(character.transform.position.x, transform.position.y, transform.position.z);
+        Vector3 newPosition = new Vector3(character.transform.position.x, character.transform.position.y, transform.position.z);
+        transform.position = newPosition;
     }
 }

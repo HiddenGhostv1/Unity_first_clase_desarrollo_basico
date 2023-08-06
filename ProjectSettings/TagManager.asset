@@ -7,13 +7,13 @@ TagManager:
   - Ground
   - Fondo
   - Trampa
-  - ' Obstaculo'
   - Collectable1
   - Collectable2
   - Collectable3
   - Power1
   - Power2
   - Power3
+  - Obstaculo
   layers:
   - Default
   - TransparentFX
