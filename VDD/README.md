@@ -1,69 +1,57 @@
 # Videogame Design Document
 ## Sección 1 - Generalidades
 1. Título:  
-_título del juego_  
+_It’s Energy_  
 
 2. Género del juego:  
-_género del juego_
+_Plataformas_
 
 3. Perspectiva:  
-Tercera persona 2D  
+Technical Form: Basically there are 2D graphics (flat)  
 
 4. Modo(s) de juego:
 - Single player  
-- Multi player (opcional)  
 5. Audiencia objetivo:
 - Edades 16-30
 - Fans de los juegos de plataforma retro
 6. Idea central:  
-_descripción de la idea central del juego_  
+_La jugabilidad de It’s Energy se basa en la exploración de niveles por plataformas. Los jugadores deben enfrentarse a una variedad de enemigos y lograr llegar al final de los diferentes mundos para poder avanzar.
+La muerte es una parte integral de la experiencia de juego y cada derrota se convierte en una oportunidad para aprender y mejorar.
+
+A medida que se avanza en el juego, se obtienen diferentes ítems, estos mismos nos ayudarán a avanzar en los diferentes niveles del juego ya sea con puntaje o dar habilidades especiales a nuestro personaje
+_  
 
 7. Objetivo del juego:  
-_descripción del objetivo del juego_  
+_Nuestro personaje tiene una terrible enfermedad la cual puede acabar con su vida y gracias a esto tiene que salir por los diferentes escenarios y lograr recolectar las frutas que hay en cada escenario, gracias a esto lograra hacer un Súper Licuado el cual le ayude a salvar su vida._  
 
 8. Tópico del juego:  
 Juego de Plataforma Heróico  
 
 9. Plataformas disponibles:
-- Android
 - PC (Linux, Win11, Mac)
-- Xbox360
 
 ## Sección 2 - Background & Flujo del juego
 1. Contexto:  
-_describir el contexto/historia donde se desarrolla el juego_  
+_Al terminar un día normal en le laboratorio, nuestro personaje virtual guy, se enera que tiene una emfermedad terminal, lo que no sabia es que las concidencias existen, lo cual casí al mismo tiempo como por obra del destino, se le ofrece la oportunidad de realizar el batido de la "Cura eterna", aquel mito que podra combatir con cualquier enfermidad y obtener un curpo saludable, nuestro personaje decide emprender la busqueda de aquellas frutas que traeran consigo, la salvación de su cruzada._  
 
 2. Historia del personaje:  
-_describir quién es el personaje y cómo se conecta con la historia del juego_  
+_ personaje tiene una terrible enfermedad la cual puede acabar con su vida, está en busqueda de las frutas magicas, para realizar el batido de la cura eterna_  
 
 3. Historia de los enemigos:  
-_describir quienes son los enemigos (si los hay) y cómo se conectan con la historia del juego_  
+_Se encontrará con diferentes enemigos que se encuentran en la travesia de su busqueda_  
 
 4. Desarrollo de la historia:  
-_describir cómo se desarrolla la historia del juego a medida que le personaje avanza en el mismo_  
+_Se dará cuenta que los enemigos, en algún tiempo, aquellos enemigos, eran simples humanos en busqueda de las frutas..._  
 
 ## Seccción 3 - Juego
-1. Objectivo(s):
-- objetivo 1
-- objetivo 2
-- etc
-2. Reglas del juego:
-- Regla 1 del juego
-- Regla 2 del juego
-- etc
-3. Mecánica del juego:
-  - Movimientos del personaje
-  - Movimientos de los enemigos
-  - Obstáculos y trampas
-4. Completar con varios o todos de los siguientes (a necesidad)
-• Game options
-• Modes
-• Game levels
-• Player’s controls
-• Winning
-• Losing
-• End
-• Why is all this fun? - Elementos de gamificación
+Sistema de progresión: El jugador podrá mejorar las habilidades de su personaje a medida que avance en el juego. Encontrará diferentes Items a través de los diferentes mundos que le ayudarán a avanzar en su misión de recolectar diferentes frutas para lograr salvarse de una terrible enfermedad. .
+
+
+Exploración y descubrimiento: El mundo estará lleno de secretos y rutas alternativas. Los jugadores tendrán que explorar minuciosamente los escenarios para descubrir nuevos caminos, objetos ocultos y áreas especiales.
+
+
+Monstruos desafiantes: El juego contará con una variedad de monstruos  a vencer que requerirán de mucha habilidad del jugador para lograr superarlos.
+
 
 ## Section 4 – Game Elements
 1. Environment:
